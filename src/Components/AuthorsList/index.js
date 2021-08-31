@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
@@ -6,10 +6,14 @@ import { convertDate, debounce } from '../../helperFunctions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faTrashAlt, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import './authorsList.css';
+import ModalWindow from '../ModalWindow';
 
 function AuthorsList() {
   const [authors, setAuthors] = useState([]);
   const [allAuthors, setAllAuthors] = useState([]);
+  const [show, setShow] = useState(false);
+  const [typeOfModal, setTypeOfModal] = useState('');
+  const [modalData, setModalData] = useState({})
 
   useEffect(() => {
     async function fetchData() {
@@ -22,9 +26,24 @@ function AuthorsList() {
     fetchData();
   }, []);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleAddAuthor = () => {
+    setTypeOfModal('add');
+    handleShow();
+  }
+
+  const handleEditAuthor = (id) => {
+    const author = authors.filter((author) => author.id === id);
+    setTypeOfModal('edit');
+    setModalData(...author);
+    handleShow();
+  }
+
   const handleDelete = async (id) => {
-    let result = window.confirm('Are you sure that you want to delete this author permanently?');
-    if (result) {
+    const confirmed = window.confirm('Are you sure that you want to delete this author permanently?');
+    if (confirmed) {
       const filteredAuthors = authors.filter((author) => author.id !== id);
       setAuthors(filteredAuthors);
       setAllAuthors(filteredAuthors);
@@ -53,7 +72,7 @@ function AuthorsList() {
         <td>{convertDate(author.dateOfDeath)}</td>
         <td>
           <Link to={{ pathname: `/books/${author.id}` }} className='author-button'><FontAwesomeIcon icon={faBook} /></Link>
-          <button className='author-button'><FontAwesomeIcon icon={faUserEdit} /></button>
+          <button className='author-button' onClick={() =>  handleEditAuthor(author.id)}><FontAwesomeIcon icon={faUserEdit} /></button>
           <button className='author-button' onClick={() => handleDelete(author.id)}><FontAwesomeIcon icon={faTrashAlt} /></button>
         </td>
       </tr>
@@ -63,7 +82,7 @@ function AuthorsList() {
   return (
     <div className='authors-wrapper'>
       <input type='search' className='search-bar' placeholder='Search authors by name' onInput={handleSearch} />
-      <button className='add-author'>Add author</button>
+      <button className='add-author' onClick={handleAddAuthor}>Add author</button>
       <Table bordered hover size="sm">
         <thead>
           <tr>
@@ -79,6 +98,7 @@ function AuthorsList() {
           {tableBody}
         </tbody>
       </Table>
+      <ModalWindow show={show} handleClose={handleClose} data={modalData} type={typeOfModal} authors={allAuthors} setAuthors={setAuthors} />
     </div>
   );
 }
