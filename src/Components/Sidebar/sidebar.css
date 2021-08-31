@@ -9,11 +9,28 @@
 
 .sidebar-link {
     display: block;
-    background-color: antiquewhite;
+    box-sizing: border-box;
     height: 40px;
-    margin: 5px 0 0 0;
-    color: black;
-    border-radius: 20px;
-    text-decoration: none;
     line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    margin: 15px 10px 0 10px;
+    border-radius: 5px;
+    border-bottom: 2px solid lightgrey;
+    background-image: linear-gradient(to bottom, #F2F5F6, #DBDEDF);
+}
+
+.sidebar-link:hover {
+    color: white;
+    border-bottom: 2px solid #C39F04;
+    background-image: linear-gradient(to bottom, #FFDB08, #F1BF00);
+}
+
+.sidebar-link:focus {
+    color: white;
+    background-image: none;
+    background-color: #f1c40f;
+    border-bottom: none;
 }

@@ -1,14 +1,68 @@
 .author-button {
+    position: relative;
     display: inline-block;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    box-sizing: border-box;
     width: 40px;
     height: 40px;
-    font-size: 20px;
+    border-radius: 6px;
+    outline: 1px #27ae60;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 25px;
+    box-shadow: 1px 2px 2px grey;
     margin: 0 10px 0 10px;
 }
+
+.author-button span {
+    display: none;
+    font-size: 12px;
+    min-width: 140px;
+    height: 24px;
+    line-height: 24px;
+}
+
+.button--red {
+    background-color: #e74c3c;
+    background-image: linear-gradient(to bottom, #FF5340, #E63622);
+}
+
+.button--yellow {
+    background-color: #f1c40f;
+    background-image: linear-gradient(to bottom, #FFDB08, #F1BF00);
+}
+
+.button--blue {
+    background-color: #2980b9;
+    background-image: linear-gradient(to bottom, #298ECE, #0A74B3);
+}
+
+.author-button:hover {
+    color: white;
+    background-image: none;
+    box-shadow: none;
+}
+
+.author-button:hover span {
+    display: inline-block;
+    position: absolute;
+    top: -35px;
+    left: -50px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    color: #6c6c6c;
+    z-index: 100;
+}
+
 .authors-wrapper {
     width: 100%;
 }
-.search-bar{
+
+.search-bar {
     display: inline-block;
     width: 70%;
     height: 40px;
@@ -22,4 +76,24 @@
     width: 25%;
     height: 40px;
     margin: 0 0 0 25px;
+    position: relative;
+    top: 3px;
+    display: inline-block;
+    outline: none;
+    border: none;
+    /* background-color: transparent; */
+    box-sizing: border-box;
+    border-radius: 6px;
+    outline: 1px #27ae60;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 25px;
+    box-shadow: 1px 2px 2px grey;
+}
+
+.add-author:hover {
+    color: white;
+    background-image: none;
+    box-shadow: none;
 }

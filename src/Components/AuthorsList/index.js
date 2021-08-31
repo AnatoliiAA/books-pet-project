@@ -35,9 +35,10 @@ function AuthorsList() {
   }
 
   const handleEditAuthor = (id) => {
-    const author = authors.filter((author) => author.id === id);
+    const objIndex = allAuthors.findIndex(author => author.id === id);
+    const author = {...authors[objIndex]};
     setTypeOfModal('edit');
-    setModalData(...author);
+    setModalData(author);
     handleShow();
   }
 
@@ -71,9 +72,9 @@ function AuthorsList() {
         <td>{convertDate(author.dateOfBirth)}</td>
         <td>{convertDate(author.dateOfDeath)}</td>
         <td>
-          <Link to={{ pathname: `/books/${author.id}` }} className='author-button'><FontAwesomeIcon icon={faBook} /></Link>
-          <button className='author-button' onClick={() =>  handleEditAuthor(author.id)}><FontAwesomeIcon icon={faUserEdit} /></button>
-          <button className='author-button' onClick={() => handleDelete(author.id)}><FontAwesomeIcon icon={faTrashAlt} /></button>
+          <Link to={{ pathname: `/books/${author.id}` }} className='author-button button--blue'><span>Redirect to authors books</span><FontAwesomeIcon icon={faBook} /></Link>
+          <button className='author-button button--yellow' onClick={() => handleEditAuthor(author.id)}><span>Edit author</span><FontAwesomeIcon icon={faUserEdit} /></button>
+          <button className='author-button button--red' onClick={() => handleDelete(author.id)}><span>Delete author</span><FontAwesomeIcon icon={faTrashAlt} /></button>
         </td>
       </tr>
     )
@@ -82,7 +83,7 @@ function AuthorsList() {
   return (
     <div className='authors-wrapper'>
       <input type='search' className='search-bar' placeholder='Search authors by name' onInput={handleSearch} />
-      <button className='add-author' onClick={handleAddAuthor}>Add author</button>
+      <button className='add-author button--blue' onClick={handleAddAuthor}>Add author</button>
       <Table bordered hover size="sm">
         <thead>
           <tr>
