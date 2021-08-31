@@ -15,8 +15,11 @@ function App() {
       <div className="App">
         <Sidebar />
         <Switch>
+          <Route path="/books/:authorId">
+            <BooksList />
+          </Route>
           <Route path="/books">
-          <BooksList/>
+            <BooksList />
           </Route>
           <Route path="/authors">
             <AuthorsList />
