@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
-import { convertDate, debounce } from '../../helperFunctions';
+import { convertDate } from '../../helperFunctions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faTrashAlt, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import './authorsList.css';
@@ -35,7 +35,7 @@ function AuthorsList() {
   }
 
   const handleEditAuthor = (id) => {
-    const objIndex = allAuthors.findIndex(author => author.id === id);
+    const objIndex = authors.findIndex(author => author.id === id);
     const author = {...authors[objIndex]};
     setTypeOfModal('edit');
     setModalData(author);
@@ -99,7 +99,7 @@ function AuthorsList() {
           {tableBody}
         </tbody>
       </Table>
-      <ModalWindow show={show} handleClose={handleClose} data={modalData} type={typeOfModal} authors={allAuthors} setAuthors={setAuthors} />
+      <ModalWindow show={show} handleClose={handleClose} data={modalData} type={typeOfModal} authors={authors} setAuthors={setAuthors} />
     </div>
   );
 }

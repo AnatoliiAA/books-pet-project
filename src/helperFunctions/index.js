@@ -16,6 +16,13 @@ export function getDateForInput(dateStr) {
     const todayDate = yyyy + '-' + mm + '-' + dd;
     return todayDate
 }
+
+export function validateName(nameStr) {
+    const regex = /^[a-zA-Z ]+$/;
+    return regex.test(nameStr);
+}
+
+
 // export function debounce(func, delay) {
 //     let timer;
 //     return (...args) => {
@@ -26,4 +33,4 @@ export function getDateForInput(dateStr) {
 //     };
 // }
 
-export default { convertDate, getDateForInput }
+export default { convertDate, getDateForInput, validateName }
